@@ -12,7 +12,7 @@ public class InteractScript : MonoBehaviour
     public GameObject solarSprite;
     public GameObject windSprite;
     private GameObject spwanPosition;
-   
+    public static int PollutionBuilding = 0;
 
     // Update is called once per frame
     void Update()
@@ -38,6 +38,8 @@ public class InteractScript : MonoBehaviour
                         Instantiate(coalSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
                         StatisticsScript.EnergyOutput += 50;
                         StatisticsScript.Money -= 100;
+                        PollutionBuilding++;
+                    //    StatisticsScript.PollutionFactor += 10;
                         ButtonScript.coalSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
@@ -46,8 +48,10 @@ public class InteractScript : MonoBehaviour
                     if (ButtonScript.oilSelected == true)
                     {
                         Instantiate(oilSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 50;
-                        StatisticsScript.Money -= 100;
+                        StatisticsScript.EnergyOutput += 80;
+                        StatisticsScript.Money -= 150;
+                        PollutionBuilding++;
+                       // StatisticsScript.PollutionFactor += 10;
                         ButtonScript.oilSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
@@ -56,8 +60,8 @@ public class InteractScript : MonoBehaviour
                     if (ButtonScript.solarSelected == true)
                     {
                         Instantiate(solarSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 50;
-                        StatisticsScript.Money -= 100;
+                        StatisticsScript.EnergyOutput += 100;
+                        StatisticsScript.Money -= 250;
                         ButtonScript.solarSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
@@ -66,8 +70,8 @@ public class InteractScript : MonoBehaviour
                     if (ButtonScript.windSelected == true)
                     {
                         Instantiate(windSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 50;
-                        StatisticsScript.Money -= 100;
+                        StatisticsScript.EnergyOutput += 130;
+                        StatisticsScript.Money -= 300;
                         ButtonScript.windSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;

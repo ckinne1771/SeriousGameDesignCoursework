@@ -10,15 +10,19 @@ public class ButtonScript : MonoBehaviour {
     public static bool oilSelected = false;
     public static bool solarSelected = false;
     public static bool windSelected = false;
-
+    public static bool nextturnSelected = false;
+    public static int turnCount = 0;
 
 
     public GameObject BuildingButton1;
     public GameObject BuildingButton2;
     public GameObject BuildingButton3;
     public GameObject BuildingButton4;
+    public GameObject NextTurnButton;
     // Use this for initialization
 
+  
+    private int lastPollutionBuildings;
     void Update()
     {
         if (cleanUpBool == true)
@@ -103,6 +107,64 @@ public class ButtonScript : MonoBehaviour {
             windSelected = false;
         }
 
+    }
+
+    public void NextTurnToggle()
+    {
+        if (nextturnSelected == false)
+        {
+            nextturnSelected = true;
+            NextTurn();
+        }
+        else if(nextturnSelected == true)
+        {
+            nextturnSelected = false;
+        }
+    }
+
+    void NextTurn()
+    {
+        if(turnCount == 0)
+        {
+            lastPollutionBuildings = 0;
+        }
+
+        if(InteractScript.PollutionBuilding >= lastPollutionBuildings)
+        {
+            StatisticsScript.PollutionFactor += 10 * InteractScript.PollutionBuilding;
+        }
+        if(InteractScript.PollutionBuilding == lastPollutionBuildings )
+        {
+            if(InteractScript.PollutionBuilding==0)
+            {
+
+            }
+            else
+            {
+                StatisticsScript.PollutionFactor += StatisticsScript.PollutionFactor;
+            }
+        }
+        if(InteractScript.PollutionBuilding< lastPollutionBuildings)
+        {
+            StatisticsScript.PollutionFactor -= (10 * (lastPollutionBuildings - InteractScript.PollutionBuilding));
+        }
+        int currentPopulation;
+        if (StatisticsScript.EnergyOutput >= StatisticsScript.EnergyDemand)
+        {
+            currentPopulation = StatisticsScript.Population;
+            StatisticsScript.Population += (StatisticsScript.EnergyOutput - StatisticsScript.EnergyDemand) + 100 - StatisticsScript.PollutionFactor;
+            StatisticsScript.Money += (StatisticsScript.EnergyOutput - StatisticsScript.EnergyDemand) + 300 + (StatisticsScript.Population - currentPopulation);
+            StatisticsScript.EnergyDemand += StatisticsScript.Population - currentPopulation;
+        }
+        else{
+            currentPopulation = StatisticsScript.Population;
+            StatisticsScript.Population -= (StatisticsScript.EnergyDemand - StatisticsScript.EnergyOutput) - 100 - StatisticsScript.PollutionFactor;
+            StatisticsScript.Money += (StatisticsScript.EnergyOutput - StatisticsScript.EnergyDemand) + 300 + (StatisticsScript.Population - currentPopulation);
+            StatisticsScript.EnergyDemand += StatisticsScript.Population - currentPopulation;
+        }
+
+        nextturnSelected = false;
+        turnCount++;
     }
 
 }
