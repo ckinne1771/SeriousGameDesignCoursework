@@ -11,6 +11,30 @@ public class StatisticsScript : MonoBehaviour {
     public static int Money;
     public static int PollutionFactor;
 
+    public int startingEnergyDemand;
+    public int startingEnergyOutput;
+    public int startingMoney;
+    public int startingPopulation;
+    public int startingPollution;
+
+    public int CoalEnergyOutput;
+    public int CoalCost;
+    public int SolarEnergyOutput;
+    public int SolarCost;
+    public int OilEnergyOutput;
+    public int OilCost;
+    public int WindEnergyOutput;
+    public int WindCost;
+
+    public static int coalEnergyOutput;
+    public static int coalCost;
+    public static int solarEnergyOutput;
+    public static int solarCost;
+    public static int oilEnergyOutput;
+    public static int oilCost;
+    public static int windEnergyOutput;
+    public static int windCost;
+
     //The Gaemobjects which represent the text output for the statistics
     public GameObject EnergyOutputText;
     public GameObject EnergyDemandText;
@@ -21,11 +45,20 @@ public class StatisticsScript : MonoBehaviour {
 
 	// At the start  of the game
 	void Start () {
-        EnergyDemand = 500;
-        EnergyOutput = 0;
-        Population = 1000;
-        Money = 1500;
-        PollutionFactor = 0;
+        EnergyDemand = startingEnergyDemand;
+        EnergyOutput = startingEnergyOutput;
+        Population = startingPopulation;
+        Money = startingMoney;
+        PollutionFactor = startingPollution;
+
+        coalCost = CoalCost;
+        coalEnergyOutput = CoalEnergyOutput;
+        oilCost = OilCost;
+        oilEnergyOutput = OilEnergyOutput;
+        solarCost = SolarCost;
+        solarEnergyOutput = SolarEnergyOutput;
+        windCost = WindCost;
+        windEnergyOutput = WindEnergyOutput;
 	}
 	
 	// Update is called once per frame. Changes the value of the statistics on screen.

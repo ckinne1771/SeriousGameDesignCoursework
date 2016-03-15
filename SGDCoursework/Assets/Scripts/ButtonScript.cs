@@ -11,6 +11,7 @@ public class ButtonScript : MonoBehaviour {
     public static bool solarSelected = false;
     public static bool windSelected = false;
     public static bool nextturnSelected = false;
+    public static bool demolishSelected = false;
     public static int turnCount = 0;
 
 
@@ -19,6 +20,7 @@ public class ButtonScript : MonoBehaviour {
     public GameObject BuildingButton3;
     public GameObject BuildingButton4;
     public GameObject NextTurnButton;
+    public GameObject demolishButton;
     // Use this for initialization
 
   
@@ -44,6 +46,7 @@ public class ButtonScript : MonoBehaviour {
         if (BuildingButtonsActive == false)
         {
             BuildingButtonsActive = true;
+            demolishSelected = false;
             BuildingButton1.SetActive(true);
             BuildingButton2.SetActive(true);
             BuildingButton3.SetActive(true);
@@ -119,6 +122,19 @@ public class ButtonScript : MonoBehaviour {
         else if(nextturnSelected == true)
         {
             nextturnSelected = false;
+        }
+    }
+    public void DemolishToggle()
+    {
+        if (demolishSelected == false)
+        {
+            demolishSelected = true;
+            cleanUpBool = true;
+        }
+        else if (demolishSelected == true)
+        {
+            demolishSelected = false;
+            cleanUpBool = true;
         }
     }
 

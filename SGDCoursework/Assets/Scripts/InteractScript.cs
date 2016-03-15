@@ -14,6 +14,8 @@ public class InteractScript : MonoBehaviour
     private GameObject spwanPosition;
     public static int PollutionBuilding = 0;
 
+   
+
     // Update is called once per frame
     void Update()
     {
@@ -28,50 +30,50 @@ public class InteractScript : MonoBehaviour
                 hit.collider.gameObject.GetComponent<Renderer>().material = IndustryMaterial;
                 //get the name of the hit square. We use the name of the object for detecting which panel was clicked. Without it, a building will be built on all squares (Yep, it was a bit funky).
                 string hitObject = hit.collider.gameObject.name;
-               
-                
-              if(this.gameObject.name == hitObject)
+
+
+                if (this.gameObject.name == hitObject)
                 {
-                  //if we are building a coal power plant
+                    //if we are building a coal power plant
                     if (ButtonScript.coalSelected == true)
                     {
                         Instantiate(coalSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 50;
-                        StatisticsScript.Money -= 100;
+                        StatisticsScript.EnergyOutput += StatisticsScript.coalEnergyOutput;
+                        StatisticsScript.Money -= StatisticsScript.coalCost;
                         PollutionBuilding++;
-                    //    StatisticsScript.PollutionFactor += 10;
+                        //    StatisticsScript.PollutionFactor += 10;
                         ButtonScript.coalSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
                     }
-                  // if we are building an oil refinery
+                    // if we are building an oil refinery
                     if (ButtonScript.oilSelected == true)
                     {
                         Instantiate(oilSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 80;
-                        StatisticsScript.Money -= 150;
+                        StatisticsScript.EnergyOutput += StatisticsScript.oilEnergyOutput;
+                        StatisticsScript.Money -= StatisticsScript.oilCost;
                         PollutionBuilding++;
-                       // StatisticsScript.PollutionFactor += 10;
+                        // StatisticsScript.PollutionFactor += 10;
                         ButtonScript.oilSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
                     }
-                  //if we are building a solar power plant
+                    //if we are building a solar power plant
                     if (ButtonScript.solarSelected == true)
                     {
                         Instantiate(solarSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 100;
-                        StatisticsScript.Money -= 250;
+                        StatisticsScript.EnergyOutput += StatisticsScript.solarEnergyOutput;
+                        StatisticsScript.Money -= StatisticsScript.solarCost;
                         ButtonScript.solarSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
                     }
-                  //if we are building a wind farm
+                    //if we are building a wind farm
                     if (ButtonScript.windSelected == true)
                     {
                         Instantiate(windSprite, new Vector3(this.transform.position.x, this.transform.position.y, -7), this.transform.rotation);
-                        StatisticsScript.EnergyOutput += 130;
-                        StatisticsScript.Money -= 300;
+                        StatisticsScript.EnergyOutput += StatisticsScript.windEnergyOutput;
+                        StatisticsScript.Money -= StatisticsScript.windCost;
                         ButtonScript.windSelected = false;
                         ButtonScript.BuildingButtonsActive = false;
                         ButtonScript.cleanUpBool = true;
@@ -79,6 +81,25 @@ public class InteractScript : MonoBehaviour
 
                 }
 
+            }
+            else if (hit.collider.gameObject.tag == "PollutedBuilding")
+            {
+                Debug.Log("hitting");
+
+                if (ButtonScript.demolishSelected == true)
+                {
+                    StatisticsScript.Money -= 5;
+                    PollutionBuilding--;
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+            else if (hit.collider.gameObject.tag == "GreenBuilding")
+            {
+                if (ButtonScript.demolishSelected == true)
+                {
+                    StatisticsScript.Money -= 5;
+                    Destroy(hit.collider.gameObject);
+                }
             }
          
         }
