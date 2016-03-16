@@ -88,7 +88,7 @@ public class InteractScript : MonoBehaviour
 
                 if (ButtonScript.demolishSelected == true)
                 {
-                    StatisticsScript.Money -= 5;
+                    StatisticsScript.Money -= 120;
                     PollutionBuilding--;
                     Destroy(hit.collider.gameObject);
                 }
@@ -97,7 +97,7 @@ public class InteractScript : MonoBehaviour
             {
                 if (ButtonScript.demolishSelected == true)
                 {
-                    StatisticsScript.Money -= 5;
+                    StatisticsScript.Money -= 120;
                     Destroy(hit.collider.gameObject);
                 }
             }
