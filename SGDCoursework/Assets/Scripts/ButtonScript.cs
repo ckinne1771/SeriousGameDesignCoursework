@@ -23,6 +23,7 @@ public class ButtonScript : MonoBehaviour {
     public GameObject demolishButton;
     // Use this for initialization
 
+    public static bool weatherSelected = false;
   
     private int lastPollutionBuildings;
     void Update()
@@ -47,10 +48,12 @@ public class ButtonScript : MonoBehaviour {
         {
             BuildingButtonsActive = true;
             demolishSelected = false;
+            weatherSelected = false;
             BuildingButton1.SetActive(true);
             BuildingButton2.SetActive(true);
             BuildingButton3.SetActive(true);
             BuildingButton4.SetActive(true);
+
         }
         else if(BuildingButtonsActive == true)
         {
@@ -129,12 +132,26 @@ public class ButtonScript : MonoBehaviour {
         if (demolishSelected == false)
         {
             demolishSelected = true;
+
             cleanUpBool = true;
+            weatherSelected = false;
         }
         else if (demolishSelected == true)
         {
             demolishSelected = false;
             cleanUpBool = true;
+        }
+    }
+
+    public void ForecastToggle()
+    {
+        if(weatherSelected == false)
+        {
+            weatherSelected = true;
+        }
+        else if(weatherSelected ==true)
+        {
+            weatherSelected = false;
         }
     }
 
