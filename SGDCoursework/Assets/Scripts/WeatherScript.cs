@@ -90,7 +90,10 @@ public class WeatherScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-        
+        if (ButtonScript.weatherSelected == false)
+        {
+            ButtonPress();
+        }
         
 	}
 

@@ -21,6 +21,9 @@ public class ButtonScript : MonoBehaviour {
     public GameObject BuildingButton4;
     public GameObject NextTurnButton;
     public GameObject demolishButton;
+
+    public GameObject todayText;
+    public GameObject tomorrowText;
     // Use this for initialization
 
     public static bool weatherSelected = false;
@@ -53,6 +56,8 @@ public class ButtonScript : MonoBehaviour {
             BuildingButton2.SetActive(true);
             BuildingButton3.SetActive(true);
             BuildingButton4.SetActive(true);
+            todayText.SetActive(false);
+            tomorrowText.SetActive(false);
 
         }
         else if(BuildingButtonsActive == true)
@@ -62,6 +67,8 @@ public class ButtonScript : MonoBehaviour {
             BuildingButton2.SetActive(false);
             BuildingButton3.SetActive(false);
             BuildingButton4.SetActive(false);
+            todayText.SetActive(false);
+            tomorrowText.SetActive(false);
         }
     }
 
@@ -107,6 +114,7 @@ public class ButtonScript : MonoBehaviour {
         if (windSelected == false)
         {
             windSelected = true;
+
         }
         else if (coalSelected == true)
         {
@@ -120,7 +128,10 @@ public class ButtonScript : MonoBehaviour {
         if (nextturnSelected == false)
         {
             nextturnSelected = true;
+            todayText.SetActive(false);
+            tomorrowText.SetActive(false);
             NextTurn();
+           
         }
         else if(nextturnSelected == true)
         {
@@ -148,10 +159,14 @@ public class ButtonScript : MonoBehaviour {
         if(weatherSelected == false)
         {
             weatherSelected = true;
+            todayText.SetActive(true);
+            tomorrowText.SetActive(true);
         }
         else if(weatherSelected ==true)
         {
             weatherSelected = false;
+            todayText.SetActive(false);
+            tomorrowText.SetActive(false);
         }
     }
 
